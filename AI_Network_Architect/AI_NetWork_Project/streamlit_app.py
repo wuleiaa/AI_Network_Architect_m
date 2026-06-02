@@ -46,7 +46,7 @@ def authenticate_user(username, password):
     conn = sqlite3.connect(get_db_path(), check_same_thread=False)
     c = conn.cursor()
     c.execute("SELECT id FROM users WHERE username = ? AND password_hash = ?",
-              (username, hash_password(password), ''))
+              (username, hash_password(password)))
     result = c.fetchone()
     conn.close()
     return result[0] if result else None
