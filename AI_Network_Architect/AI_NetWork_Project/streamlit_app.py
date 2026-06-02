@@ -559,7 +559,9 @@ if "user_id" not in st.session_state:
                     if ok:
                         st.success(msg)
                         st.session_state.show_register = False
-                        st.session_state.login_username = ru  # 自动填充
+                        st.session_state.username = ru
+                        st.session_state.login_success = True
+                        st.rerun()  # 自动填充
                     else:
                         st.error(msg)
 
