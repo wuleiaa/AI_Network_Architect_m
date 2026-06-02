@@ -1,0 +1,1 @@
+﻿python -c "import sys, io; sys.stdout=io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8'); f=open(r'F:\porj_AI_NetWork_Project\AI_Network_Architect\AI_NetWork_Project\streamlit_app.py','r',encoding='utf-8'); c=f.read(); idx=c.find('模块三：实验故障诊断'); print(c[idx:idx+600])"

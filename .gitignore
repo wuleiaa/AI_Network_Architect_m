@@ -1,0 +1,31 @@
+# ====== 敏感文件 ======
+.env
+.env.*
+netarchitect.db
+*.key
+*.pem
+*.secrets.*
+secrets.toml
+*.bak
+
+# ====== Python 临时文件 ======
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.so
+.Python
+build/
+dist/
+
+# ====== IDE 配置 ======
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ====== 测试缓存 ======
+.pytest_cache/
+*.pytest_cache*
+
+# ====== 日志 ======
+*.log
