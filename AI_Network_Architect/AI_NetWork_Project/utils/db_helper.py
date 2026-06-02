@@ -1,9 +1,9 @@
-import os
+ï»¿import os
 import sqlite3
 from pathlib import Path
 
 def get_db_path():
-    """ÖÇÄÜÅĞ¶ÏÔËĞĞ»·¾³£ºÔÆ¶ËÊ¹ÓÃÏîÄ¿Ä¿Â¼£¬±¾µØÊ¹ÓÃµ±Ç°Ä¿Â¼"""
+    """æ™ºèƒ½åˆ¤æ–­è¿è¡Œç¯å¢ƒï¼šäº‘ç«¯ä½¿ç”¨é¡¹ç›®ç›®å½•ï¼Œæœ¬åœ°ä½¿ç”¨å½“å‰ç›®å½•"""
     if os.getenv("STREAMLIT_CLOUD"):
         mount_base = os.getenv("STREAMLIT_MOUNT", "/mount/src/ai_network_architect_m")
         db_dir = os.path.join(mount_base, "AI_Network_Architect", "AI_NetWork_Project")
@@ -12,13 +12,13 @@ def get_db_path():
     return "netarchitect.db"
 
 def init_db():
-    """Í³Ò»Êı¾İ¿â³õÊ¼»¯£º´´½¨±í½á¹¹£¨ÃİµÈ£©"""
+    """ç»Ÿä¸€æ•°æ®åº“åˆå§‹åŒ–ï¼šåˆ›å»ºè¡¨ç»“æ„ï¼ˆå¹‚ç­‰ï¼‰"""
     db_path = get_db_path()
     Path(db_path).parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(db_path, check_same_thread=False)
     c = conn.cursor()
 
-    # ÓÃ»§±í
+    # ç”¨æˆ·è¡¨
     c.execute('''CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
@@ -27,19 +27,19 @@ def init_db():
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )''')
 
-    # ¶Ô»°ÀúÊ·±í£¨Í³Ò»´æ´¢Èı¸öÄ£¿é£©
+    # å¯¹è¯å†å²è¡¨ï¼ˆç»Ÿä¸€å­˜å‚¨ä¸‰ä¸ªæ¨¡å—ï¼‰
     c.execute('''CREATE TABLE IF NOT EXISTS conversations (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
         module TEXT NOT NULL,  -- 's1', 's3', 'inquiry'
         title TEXT NOT NULL,
         content TEXT NOT NULL,
-        solution TEXT,         -- ½öK3ĞèÒª
+        solution TEXT,         -- ä»…K3éœ€è¦
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
     )''')
 
-    # ÖÜ½ø¶È±í
+    # å‘¨è¿›åº¦è¡¨
     c.execute('''CREATE TABLE IF NOT EXISTS weekly_progress (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
@@ -50,7 +50,7 @@ def init_db():
     )''')
 
     conn.commit()
-    # ¼æÈİ¾ÉÊı¾İ¿âÇ¨ÒÆ£º²¹³ä salt ÁĞ
+    # å…¼å®¹æ—§æ•°æ®åº“è¿ç§»ï¼šè¡¥å…… salt åˆ—
     try:
         c.execute("ALTER TABLE users ADD COLUMN salt TEXT DEFAULT ''")
         conn.commit()

@@ -1,4 +1,4 @@
-import sqlite3
+﻿import sqlite3
 import hashlib
 from utils.db_helper import get_db_path
 
@@ -15,9 +15,9 @@ def register_user(username, password):
                   (username, hash_password(password)))
         conn.commit()
         conn.close()
-        return True, "注册成功！请登录"
+        return True, "娉ㄥ唽鎴愬姛锛佽鐧诲綍"
     except sqlite3.IntegrityError:
-        return False, "用户名已存在"
+        return False, "鐢ㄦ埛鍚嶅凡瀛樺湪"
 
 
 def authenticate_user(username, password):

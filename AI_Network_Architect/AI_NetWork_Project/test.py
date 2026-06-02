@@ -1,4 +1,4 @@
-def sigmoid(x):
+﻿def sigmoid(x):
     return 1 / (1 + 2.71828 ** (-x))
 
 
@@ -6,39 +6,39 @@ def sigmoid_derivative(y):
     return y * (1 - y)
 
 
-# 初始化参数
+# 鍒濆鍖栧弬鏁?
 W1 = 0.2
 W2 = 0.3
 b = 0.1
 
 params_history = [
-    {"轮数": 0, "W1": W1, "W2": W2, "b": b, "误差": None}
+    {"杞暟": 0, "W1": W1, "W2": W2, "b": b, "璇樊": None}
 ]
 
-# 训练数据
+# 璁粌鏁版嵁
 X = [[0, 0], [0, 1], [1, 0], [1, 1]]
 Y = [0, 0, 0, 1]
 
-# 训练参数
+# 璁粌鍙傛暟
 learning_rate = 0.5
 epochs = 1000
 
-# 训练过程
+# 璁粌杩囩▼
 for epoch in range(epochs):
     total_error = 0
     for i in range(4):
         x1, x2 = X[i]
         y_true = Y[i]
 
-        # 前向传播
+        # 鍓嶅悜浼犳挱
         z = x1 * W1 + x2 * W2 + b
         y_pred = sigmoid(z)
 
-        # 计算误差
+        # 璁＄畻璇樊
         error = y_true - y_pred
         total_error += error ** 2
 
-        # 反向传播更新参数
+        # 鍙嶅悜浼犳挱鏇存柊鍙傛暟
         delta = error * sigmoid_derivative(y_pred)
         W1 += learning_rate * delta * x1
         W2 += learning_rate * delta * x2
@@ -47,33 +47,33 @@ for epoch in range(epochs):
     if (epoch + 1) % 100 == 0:
         avg_error = total_error / 4
         params_history.append({
-            "轮数": epoch + 1,
+            "杞暟": epoch + 1,
             "W1": round(W1, 4),
             "W2": round(W2, 4),
             "b": round(b, 4),
-            "误差": round(avg_error, 6)
+            "璇樊": round(avg_error, 6)
         })
 
-# 打印参数变化
-print("===== 权重/偏置变化过程 =====")
+# 鎵撳嵃鍙傛暟鍙樺寲
+print("===== 鏉冮噸/鍋忕疆鍙樺寲杩囩▼ =====")
 for item in params_history:
-    if item["误差"] is not None:
-        print(f"轮数：{item['轮数']} | W1={item['W1']} | W2={item['W2']} | b={item['b']} | 平均误差={item['误差']}")
+    if item["璇樊"] is not None:
+        print(f"杞暟锛歿item['杞暟']} | W1={item['W1']} | W2={item['W2']} | b={item['b']} | 骞冲潎璇樊={item['璇樊']}")
     else:
-        print(f"轮数：{item['轮数']}（初始） | W1={item['W1']} | W2={item['W2']} | b={item['b']}")
+        print(f"杞暟锛歿item['杞暟']}锛堝垵濮嬶級 | W1={item['W1']} | W2={item['W2']} | b={item['b']}")
 
-# 测试模型
-print("\n===== 测试结果 =====")
+# 娴嬭瘯妯″瀷
+print("\n===== 娴嬭瘯缁撴灉 =====")
 for i in range(4):
     x1, x2 = X[i]
     y_true = Y[i]
     z = x1 * W1 + x2 * W2 + b
     y_pred = sigmoid(z)
     y_pred_round = round(y_pred)
-    print(f"输入({x1},{x2}) → 预测值={round(y_pred, 4)} → 四舍五入={y_pred_round} → 真实值={y_true}")
+    print(f"杈撳叆({x1},{x2}) 鈫?棰勬祴鍊?{round(y_pred, 4)} 鈫?鍥涜垗浜斿叆={y_pred_round} 鈫?鐪熷疄鍊?{y_true}")
 
-# 打印最终参数
-print("\n===== 最终训练结果 =====")
-print(f"最终权重W1：{round(W1, 4)}")
-print(f"最终权重W2：{round(W2, 4)}")
-print(f"最终偏置b：{round(b, 4)}")
+# 鎵撳嵃鏈€缁堝弬鏁?
+print("\n===== 鏈€缁堣缁冪粨鏋?=====")
+print(f"鏈€缁堟潈閲峎1锛歿round(W1, 4)}")
+print(f"鏈€缁堟潈閲峎2锛歿round(W2, 4)}")
+print(f"鏈€缁堝亸缃産锛歿round(b, 4)}")
