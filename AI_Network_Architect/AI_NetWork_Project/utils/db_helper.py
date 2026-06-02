@@ -31,10 +31,10 @@ def init_db():
     c.execute('''CREATE TABLE IF NOT EXISTS conversations (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
-        module TEXT NOT NULL,  -- 's1', 's3', 'inquiry'
+        module TEXT NOT NULL,
         title TEXT NOT NULL,
         content TEXT NOT NULL,
-        solution TEXT,         -- 仅K3需要
+        solution TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
     )''')
@@ -50,7 +50,6 @@ def init_db():
     )''')
 
     conn.commit()
-    # 兼容旧数据库迁移：补充 salt 列
     try:
         c.execute("ALTER TABLE users ADD COLUMN salt TEXT DEFAULT ''")
         conn.commit()
