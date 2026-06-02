@@ -23,7 +23,7 @@ def init_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
         password_hash TEXT NOT NULL,
-        salt TEXT NOT NULL,
+        salt TEXT DEFAULT "",
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )''')
 
